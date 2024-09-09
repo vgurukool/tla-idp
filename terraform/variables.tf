@@ -1,6 +1,6 @@
 variable "repo_url" {
   description = "Repository URL where application definitions are stored"
-  default     = "https://github.com/manabuOrg/ref-impl"
+  default     = "https://github.com/vgurukool/reference-implementation-aws"
   type        = string
 }
 
