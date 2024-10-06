@@ -13,6 +13,7 @@ locals {
   kc_cnoe_url = "https://${local.kc_domain_name}/realms/cnoe"
   argo_domain_name = "argo.${local.domain_name}"
   argo_redirect_url = "https://${local.argo_domain_name}/oauth2/callback"
+  tlalrs_redirect_url = "https://${local.argo_domain_name}/oauth2/callback"
   argocd_domain_name = "argocd.${local.domain_name}"
   backstage_domain_name = "backstage.${local.domain_name}"
 }
