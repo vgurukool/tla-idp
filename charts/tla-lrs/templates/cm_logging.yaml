@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.loggingConfigConfigMap }}"
+  namespace: tla-lrs
+  labels:
+    {{- include "ralph.labels" . | nindent 4 }}
+data:
+  {{ with .Values.loggingConfig }}
+  logging-config.yaml: |
+    {{- toYaml . | nindent 4 }}
+  {{- end }}

@@ -1,0 +1,27 @@
+apiVersion: v2
+appVersion: 3.8.0
+dependencies:
+- condition: elasticsearch.enabled
+  name: elasticsearch
+  repository: "file://../bitnami/elasticsearch"
+  version: 21.3.20
+- condition: mongodb.enabled
+  name: mongodb
+  repository: "file://../bitnami/mongodb"
+  version: 15.6.26
+- condition: clickhouse.enabled
+  name: clickhouse
+  repository: "file://../bitnami/clickhouse"
+  version: 6.2.27
+description: Ralph, the ultimate Learning Record Store (and more!) for your learning analytics
+home: https://bitnami.com
+icon: https://raw.githubusercontent.com/openfun/logos/main/ralph/ralph-color-dark.png
+keywords:
+- tla
+maintainers:
+- name: Broadcom, Inc. All Rights Reserved.
+  url: https://github.com/bitnami/charts
+name: tla-lrs
+sources:
+- https://github.com/vgurukool/tla-helm/blob/main/charts/tla-lrs
+version: 0.0.1

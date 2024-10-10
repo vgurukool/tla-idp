@@ -1,0 +1,28 @@
+{
+    "protocol": "openid-connect",
+    "clientId": "tla-lrs",
+    "name": "TLA LRS Client",
+    "description": "Used for TLA LRS SSO",
+    "publicClient": false,
+    "authorizationServicesEnabled": false,
+    "serviceAccountsEnabled": false,
+    "implicitFlowEnabled": false,
+    "directAccessGrantsEnabled": true,
+    "standardFlowEnabled": true,
+    "frontchannelLogout": true,
+    "attributes": {
+      "saml_idp_initiated_sso_url_name": "",
+      "oauth2.device.authorization.grant.enabled": false,
+      "oidc.ciba.grant.enabled": false
+    },
+    "alwaysDisplayInConsole": false,
+    "rootUrl": "",
+    "baseUrl": "",
+    "redirectUris": [
+      "${TLA_LRS_REDIRECT_URL}"
+    ],
+    "webOrigins": [
+      "/*"
+    ]
+  }
+  
