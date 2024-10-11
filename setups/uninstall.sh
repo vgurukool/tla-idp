@@ -26,3 +26,16 @@ terraform destroy
 cd "${SETUP_DIR}/argocd/"
 ./uninstall.sh
 cd - 
+
+# delete up tla-lrs. 
+echo "deleting tla-lrs apps using argocd"
+cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
+
+argoPass=$(kubectl -n argocd get secret argocd-initial-admin-secret \
+    -o jsonpath="{.data.password}" | base64 -d)
+
+argocd login --grpc-web argocd.tlaidp.com --username admin --password $argoPass
+
+argocd app delete tla-lrs --file tla-lrs.yaml
+cd -
+echo "tla lrs app deleted"

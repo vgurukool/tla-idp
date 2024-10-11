@@ -40,3 +40,5 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: data-on-eks
       server: https://kubernetes.default.svc
+    - namespace: tla-lrs
+      server: https://kubernetes.default.svc
