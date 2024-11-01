@@ -37,5 +37,9 @@ argoPass=$(kubectl -n argocd get secret argocd-initial-admin-secret \
 argocd login --grpc-web argocd.tlaidp.com --username admin --password $argoPass
 
 argocd app delete tla-lrs --file tla-lrs.yaml
+
+argocd app delete tla-meetup --file tla-meetup.yaml
+
+
 cd -
 echo "tla lrs app deleted"

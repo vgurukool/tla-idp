@@ -25,25 +25,25 @@ export GITHUB_URL=$(yq '.repo_url' ./setups/config.yaml)
 
 ## check that the eks cluster exist
 
-echo "Checking if eks cluster exist"
-retry_count=0
-max_retries=2
+# echo "Checking if eks cluster exist"
+# retry_count=0
+# max_retries=2
 
-set +e
-while [ $retry_count -le $max_retries ]; do
-  aws eks describe-cluster --name cnoe-ref-impl
-  if [ $? -eq 0 ]; then
-    break
-  fi
-  echo "An error occurred. Retrying in 5 seconds"
-  sleep 5
-  ((retry_count++))
-done
+# set +e
+# while [ $retry_count -le $max_retries ]; do
+#   aws eks describe-cluster --name cnoe-ref-impl
+#   if [ $? -eq 0 ]; then
+#     break
+#   fi
+#   echo "An error occurred. Retrying in 5 seconds"
+#   sleep 5
+#   ((retry_count++))
+# done
 
-if [ $? -ne 0 ]; then
-  echo 'could not find eks cluster aborting'
-  exit 1
-fi
+# if [ $? -ne 0 ]; then
+#   echo 'could not find eks cluster aborting'
+#   exit 1
+# fi
 
  ## if yes continue else ask they want to create one
 
