@@ -3,6 +3,8 @@ set -e -o pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel)
 
+## this is to obtain github access token and export it
+
 if [ -f "${REPO_ROOT}/private/github-token" ]; then
   GITHUB_TOKEN=$(cat ${REPO_ROOT}/private/github-token | tr -d '\n')
 else
@@ -22,9 +24,15 @@ fi
 
 export GITHUB_TOKEN
 
+
+#########
+
+### secrets ##########
 echo 'creating secret for ArgoCD in your cluster...'
 kubectl create ns argocd || true
 envsubst < github-secret.yaml  | kubectl apply -f - 
+
+#############
 
 echo 'creating Argo CD resources'
 cd ${REPO_ROOT}

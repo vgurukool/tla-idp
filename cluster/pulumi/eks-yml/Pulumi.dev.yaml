@@ -1,0 +1,7 @@
+config:
+  aws:region: us-west-2
+  eks-yml:desiredClusterSize: "3"
+  eks-yml:eksNodeInstanceType: t3.medium
+  eks-yml:maxClusterSize: "6"
+  eks-yml:minClusterSize: "3"
+  eks-yml:vpcNetworkCidr: 10.0.0.0/16

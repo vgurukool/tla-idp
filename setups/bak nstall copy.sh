@@ -22,41 +22,11 @@ fi
 
 export GITHUB_URL=$(yq '.repo_url' ./setups/config.yaml)
 
-
-## check that the eks cluster exist
-
-echo "Checking if eks cluster exist"
-retry_count=0
-max_retries=2
-
-set +e
-while [ $retry_count -le $max_retries ]; do
-  aws eks describe-cluster --name cnoe-ref-impl
-  if [ $? -eq 0 ]; then
-    break
-  fi
-  echo "An error occurred. Retrying in 5 seconds"
-  sleep 5
-  ((retry_count++))
-done
-
-if [ $? -ne 0 ]; then
-  echo 'could not find eks cluster aborting'
-  exit 1
-fi
-
- ## if yes continue else ask they want to create one
-
-## if no abort, if yes ask the tool to use
-
-################
-
 # Set up ArgoCD. We will use ArgoCD to install all components.
 cd "${REPO_ROOT}/setups/argocd/"
 ./install.sh
 cd -
 
-##########
 
 # The rest of the steps are defined as a Terraform module. Parse the config to JSON and use it as the Terraform variable file. This is done because JSON doesn't allow you to easily place comments.
 # commenting for now
@@ -78,8 +48,3 @@ cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
 argocd app create tla-lrs --file tla-lrs.yaml  --server argocd.tlaidp.com
 cd -
 echo "tla lrs app created"
-
-cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
-argocd app create tla-meetup --file tla-meetup.yaml  --server argocd.tlaidp.com
-cd -
-echo "tla meetup app created"

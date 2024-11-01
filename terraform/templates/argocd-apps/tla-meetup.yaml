@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tla-lrs
+  name: tla-meetup
   namespace: argocd
   labels:
     env: dev
@@ -11,12 +11,12 @@ spec:
   project: cnoe
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: tla-lrs
+    namespace: tla-meetup
   syncPolicy:
     automated: {}
     syncOptions:
       - CreateNamespace=true
   sources:
     - repoURL: 'https://github.com/vgurukool/tla-helm'
-      path: charts/ralph/
+      path: charts/indico/
       targetRevision: HEAD
