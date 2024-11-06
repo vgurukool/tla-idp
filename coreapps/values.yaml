@@ -1,0 +1,31 @@
+# -- Deploy Argo CD Applications within this helm release
+# @default -- `{}` (See [values.yaml])
+## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
+applications:
+  argo-workflows:
+    name: argo-workflows-sso-config
+    namespace: argocd
+    labels:
+      env: dev
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    project: cnoe
+    sources:
+      - repo_url: "https://github.com/vgurukool/tla-idp"
+        targetRevision: HEAD
+        path: charts/argo-workflows
+    destination:
+      server: "https://kubernetes.default.svc"
+      namespace: argo
+    syncPolicy:
+      automated: {}
+      syncOptions:
+        - CreateNamespace=true
+
+# -- Deploy Argo CD Projects within this helm release
+# @default -- `{}` (See [values.yaml])
+## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
+projects: {}
+applicationsets: {}
+itemTemplates: []
+extensions: {}

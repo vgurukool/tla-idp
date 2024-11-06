@@ -28,18 +28,23 @@ cd "${SETUP_DIR}/argocd/"
 cd - 
 
 # delete up tla-lrs. 
-echo "deleting tla-lrs apps using argocd"
-cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
+# echo "deleting tla-lrs apps using argocd"
+# cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
 
-argoPass=$(kubectl -n argocd get secret argocd-initial-admin-secret \
-    -o jsonpath="{.data.password}" | base64 -d)
+# argoPass=$(kubectl -n argocd get secret argocd-initial-admin-secret \
+#     -o jsonpath="{.data.password}" | base64 -d)
 
-argocd login --grpc-web argocd.tlaidp.com --username admin --password $argoPass
+# argocd login --grpc-web argocd.tlaidp.com --username admin --password $argoPass
 
-argocd app delete tla-lrs --file tla-lrs.yaml
+# argocd app delete tla-lrs --file tla-lrs.yaml
 
-argocd app delete tla-meetup --file tla-meetup.yaml
+# argocd app delete tla-meetup --file tla-meetup.yaml
 
 
+# cd -
+# echo "tla lrs app deleted"
+
+# We will use ArgoCD to install all apps.
+cd "${REPO_ROOT}/apps/"
+./uninstall.sh
 cd -
-echo "tla lrs app deleted"

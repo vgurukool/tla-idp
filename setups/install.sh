@@ -66,20 +66,25 @@ terraform init -upgrade
 terraform apply -auto-approve
 
 # Set up tla-lrs. 
-echo "creating tla-lrs apps using argocd"
-argoPass=$(kubectl -n argocd get secret argocd-initial-admin-secret \
-    -o jsonpath="{.data.password}" | base64 -d)
-# argocd login --insecure --grpc-web k3s_master:32761 --username admin \
-#     --password $argoPass
+# echo "creating tla-lrs apps using argocd"
+# argoPass=$(kubectl -n argocd get secret argocd-initial-admin-secret \
+#     -o jsonpath="{.data.password}" | base64 -d)
+# # argocd login --insecure --grpc-web k3s_master:32761 --username admin \
+# #     --password $argoPass
 
-argocd login argocd.tlaidp.com --username admin --password $argoPass
+# argocd login argocd.tlaidp.com --username admin --password $argoPass
 
-cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
-argocd app create tla-lrs --file tla-lrs.yaml  --server argocd.tlaidp.com
+# cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
+# argocd app create tla-lrs --file tla-lrs.yaml  --server argocd.tlaidp.com
+# cd -
+# echo "tla lrs app created"
+
+# cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
+# argocd app create tla-meetup --file tla-meetup.yaml  --server argocd.tlaidp.com
+# cd -
+# echo "tla meetup app created"
+
+# We will use ArgoCD to install all apps.
+cd "${REPO_ROOT}/apps/"
+./install.sh
 cd -
-echo "tla lrs app created"
-
-cd "${REPO_ROOT}/terraform/templates/argocd-apps/"
-argocd app create tla-meetup --file tla-meetup.yaml  --server argocd.tlaidp.com
-cd -
-echo "tla meetup app created"
