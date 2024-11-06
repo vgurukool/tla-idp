@@ -38,7 +38,7 @@ applications:
         - CreateNamespace=true
     sources:
       - repoURL: 'https://github.com/vgurukool/tla-helm'
-        path: tla/charts/ralph/
+        path: charts/tla/indico/
         targetRevision: HEAD
 #  guestbook:
 #    namespace: argocd

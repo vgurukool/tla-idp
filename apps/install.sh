@@ -1,11 +1,18 @@
 #!/bin/bash
 set -e -o pipefail
 
+
 REPO_ROOT=$(git rev-parse --show-toplevel)
 
 kubectl wait --for=jsonpath=.status.health.status=Healthy -n argocd application/keycloak
 kubectl wait --for=condition=ready pod -l app=keycloak -n keycloak  --timeout=30s
-echo "Creating keycloak client for Argo Workflows"
+
+echo "deploying argo apps"
+helm install argoapps .
+
+echo "apps deployed to argicd"
+
+echo "Creating keycloak client for Argo apps"
 
 ADMIN_PASSWORD=$(kubectl get secret -n keycloak keycloak-config -o go-template='{{index .data "KEYCLOAK_ADMIN_PASSWORD" | base64decode}}')
 kubectl port-forward -n keycloak svc/keycloak 8090:8080 > /dev/null 2>&1 &
